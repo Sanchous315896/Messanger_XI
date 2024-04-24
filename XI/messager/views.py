@@ -71,7 +71,20 @@ def logout_view(request):
 # Илюха сюда
 
 
-# Саня сюда
+@login_required
+def profile(request, pk):
+    profile_data = Profile.objects.get(id=pk)
+    user = request.user
+    context = {"profile": profile_data, "user": user}
+    return render(request, 'profile.html', context)
+
+
+@login_required
+def update_post(request, pk):
+    post = Post.objects.get(id=pk)
+    form = UpdateForm(instance=post)
+
+    return render(request, 'update.html', {'form': form, 'post': post})
 
 
 @login_required
