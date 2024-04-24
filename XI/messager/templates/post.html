@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+    <style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #D3F2FF;
+}
+a{
+text-decoration:none;
+color:#000;
+font-size:25px;
+}
+.account-container {
+  position:fixed;
+  top:0;
+  right:0;
+  height: 100vh;
+  width: 300px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.post-container {
+  margin-top: 50px;
+  margin-left:50px;
+  margin-bottom:50px;
+    margin-right: 20px;
+  width: 50%;
+  background-color: #F8FCFF;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.user-info {
+  margin-left: 10px;
+}
+
+.post-content {
+  margin-top: 10px;
+}
+
+.post-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sidebar {
+  width: 100%;
+  background-color: #227CA4;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #ffffff;
+}
+
+.user-profile {
+
+  margin-bottom: 20px;
+}
+
+.navigation {
+  list-style-type: none;
+  padding: 0;
+}
+
+.navigation li {
+  margin-bottom: 10px;
+}
+
+.navigation li a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.navigation li a:hover {
+  color: #E6F8FF;
+}
+
+button {
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  height: 40px;
+  width: 70px;
+  background-color: #227CA4;
+  
+}
+
+button:hover {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+<!--{{post.posted_time}}-->
+      .content-container{
+      display:flex;
+      flex-direction:column;
+      }
+    </style>
+</head>
+<body>
+<div class="content-container">
+{%for post in posts%}
+    <div class="post-container">
+      <div class="post-header">
+        <div class="avatar">
+          <!-- Изображение для аватара -->
+        </div>
+        <div class="user-info">
+          <h3>{{post.owner}}</h3>
+          <p>posted at {{post.posted_time}}</p>
+          <h4>{{post.title}}</h4>
+        </div>
+      </div>
+
+      <div class="post-content">
+        <p>{{post.content}}</p>
+      </div>
+      <div class="post-actions">
+        <a class="like-btn" href="/like/{{post.id}}">Like {{post.likes}} </a>
+      </div>
+
+    </div>
+    {%endfor%}
+  </div>
+  <div class="account-container">
+    <div class="sidebar">
+      <div class="user-profile">
+        <div class="avatar">
+          <!-- Изображение для аватара -->
+        </div>
+        <h3>{{user}}</h3>
+      </div>
+      <ul class="navigation">
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Friend</a></li>
+        <li><a href="/create/">Create post</a></li>
+        <li><a href="{% url 'logout' %}">Log out</a></li>
+      </ul>
+    </div>
+  </div>
+  
+</body>
+</html>
